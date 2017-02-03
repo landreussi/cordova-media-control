@@ -5,6 +5,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import android.view.KeyEvent;
 import android.content.Intent;
+import android.content.Context;
 
 public class Main extends CordovaPlugin {
 
