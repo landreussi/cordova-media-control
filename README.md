@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Cordova Hello World Plugin
 
 Simple plugin that returns your string prefixed with hello.
@@ -44,3 +45,7 @@ Run the code
 For more information on setting up Cordova see [the documentation](http://cordova.apache.org/docs/en/latest/guide/cli/index.html)
 
 For more info on plugins see the [Plugin Development Guide](http://cordova.apache.org/docs/en/latest/guide/hybrid/plugins/index.html)
+=======
+# cordova-media-control
+A global media control plugin for cordova
+>>>>>>> 1a66d3c9b4a4805ff490934b5d7b38781f25bd39
