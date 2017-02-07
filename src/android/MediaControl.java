@@ -11,7 +11,7 @@ public class Main extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
         String value = data.getString(0);
-        Context context = new Context();
+        // Context context = new Context();
         if (action.equals("do")) {
           if (value.equals("play")){
             Intent i = new Intent(Intent.ACTION_MEDIA_BUTTON);
