@@ -1,11 +1,10 @@
-package com.example.plugin;
+package com.trinity.mediaControl;
 
 import org.apache.cordova.*;
 import org.json.JSONArray;
 import org.json.JSONException;
-import android.view.KeyEvent;
-import android.content.Intent;
-import android.content.Context;
+import android.view.*;
+import android.content.*;
 
 public class Main extends CordovaPlugin {
 
