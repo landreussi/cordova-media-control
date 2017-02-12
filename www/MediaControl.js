@@ -2,5 +2,5 @@
 
 module.exports = {
     do: function (action, successCallback, errorCallback) {
-        cordova.exec(successCallback, errorCallback, "Main", "do", [action]);
+        cordova.exec(successCallback, errorCallback, "MediaControl", "do", [action]);
 };

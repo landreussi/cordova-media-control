@@ -18,7 +18,7 @@ import android.os.Looper;
 import android.Manifest;
 
 
-public class Main extends CordovaPlugin {
+public class MediaControl extends CordovaPlugin {
     public static final Context context;
     @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
