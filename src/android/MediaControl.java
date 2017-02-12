@@ -4,12 +4,13 @@ import org.apache.cordova.PermissionHelper;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.apache.cordova.CallbackcallbackContext;
+import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.PluginResult;
 import android.content.pm.PackageManager;
 import android.util.Log;
 import android.content.Intent;
+import android.view.KeyEvent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -19,7 +20,7 @@ import android.Manifest;
 public class Main extends CordovaPlugin {
 
     @Override
-    public boolean execute(String action, JSONArray data, CallbackcallbackContext callbackcallbackContext) throws JSONException {
+    public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
         String value = data.getString(0);
         if (action.equals("do")) {
           if (value.equals("play")){
