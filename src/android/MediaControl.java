@@ -1,23 +1,32 @@
 package com.trinity.mediaControl;
 
-import org.apache.cordova.*;
+import org.apache.cordova.PermissionHelper;
 import org.json.JSONArray;
 import org.json.JSONException;
-import android.view.*;
-import android.content.*;
+import org.json.JSONObject;
+import org.apache.cordova.CallbackcallbackContext;
+import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.PluginResult;
+import android.content.pm.PackageManager;
+import android.util.Log;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.Manifest;
+
 
 public class Main extends CordovaPlugin {
 
     @Override
-    public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
+    public boolean execute(String action, JSONArray data, CallbackcallbackContext callbackcallbackContext) throws JSONException {
         String value = data.getString(0);
-        // Context context = new Context();
         if (action.equals("do")) {
           if (value.equals("play")){
             Intent i = new Intent(Intent.ACTION_MEDIA_BUTTON);
             synchronized (this) {
               i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PLAY));
-              context.sendOrderedBroadcast(i, null);
+              callbackContext.sendOrderedBroadcast(i, null);
             }
             return true;
           }
@@ -25,7 +34,7 @@ public class Main extends CordovaPlugin {
             Intent i = new Intent(Intent.ACTION_MEDIA_BUTTON);
             synchronized (this) {
               i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PAUSE));
-              context.sendOrderedBroadcast(i, null);
+              callbackContext.sendOrderedBroadcast(i, null);
             }
             return true;
           }
@@ -33,7 +42,7 @@ public class Main extends CordovaPlugin {
             Intent i = new Intent(Intent.ACTION_MEDIA_BUTTON);
             synchronized (this) {
               i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_NEXT));
-              context.sendOrderedBroadcast(i, null);
+              callbackContext.sendOrderedBroadcast(i, null);
             }
             return true;
           }
@@ -41,11 +50,16 @@ public class Main extends CordovaPlugin {
             Intent i = new Intent(Intent.ACTION_MEDIA_BUTTON);
             synchronized (this) {
               i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PREVIOUS));
-              context.sendOrderedBroadcast(i, null);
+              callbackContext.sendOrderedBroadcast(i, null);
             }
             return true;
           }
           else if (value.equals("stop")){
+            Intent i = new Intent(Intent.ACTION_MEDIA_BUTTON);
+            synchronized (this) {
+              i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_STOP));
+              callbackContext.sendOrderedBroadcast(i, null);
+            }
             return true;
           }
           else{
