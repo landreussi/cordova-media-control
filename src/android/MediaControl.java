@@ -19,7 +19,7 @@ import android.Manifest;
 
 
 public class Main extends CordovaPlugin {
-    public final Context context;
+    public static final Context context;
     @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
         String value = data.getString(0);
