@@ -25,6 +25,7 @@ public class Main extends CordovaPlugin {
         String value = data.getString(0);
         if (action.equals("do")) {
           Intent i = new Intent(Intent.ACTION_MEDIA_BUTTON);
+          Context context = new Context();
           if (value.equals("play")){
             synchronized (this) {
               i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PLAY));
