@@ -19,13 +19,12 @@ import android.Manifest;
 
 
 public class Main extends CordovaPlugin {
-
+    public final Context context;
     @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
         String value = data.getString(0);
         if (action.equals("do")) {
           Intent i = new Intent(Intent.ACTION_MEDIA_BUTTON);
-          Context context = new Context();
           if (value.equals("play")){
             synchronized (this) {
               i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PLAY));
