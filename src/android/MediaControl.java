@@ -19,7 +19,6 @@ import android.Manifest;
 
 
 public class MediaControl extends CordovaPlugin {
-    public static final Context context;
     @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
         String value = data.getString(0);
@@ -28,35 +27,35 @@ public class MediaControl extends CordovaPlugin {
           if (value.equals("play")){
             synchronized (this) {
               i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PLAY));
-              context.sendOrderedBroadcast(i, null);
+              sendOrderedBroadcast(i, null);
             }
             return true;
           }
           else if (value.equals("pause")){
             synchronized (this) {
               i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PAUSE));
-              context.sendOrderedBroadcast(i, null);
+              sendOrderedBroadcast(i, null);
             }
             return true;
           }
           else if (value.equals("next")){
             synchronized (this) {
               i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_NEXT));
-              context.sendOrderedBroadcast(i, null);
+              sendOrderedBroadcast(i, null);
             }
             return true;
           }
           else if (value.equals("prev")){
             synchronized (this) {
               i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PREVIOUS));
-              context.sendOrderedBroadcast(i, null);
+              sendOrderedBroadcast(i, null);
             }
             return true;
           }
           else if (value.equals("stop")){
             synchronized (this) {
               i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_STOP));
-              context.sendOrderedBroadcast(i, null);
+              sendOrderedBroadcast(i, null);
             }
             return true;
           }
