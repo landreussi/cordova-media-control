@@ -1,63 +1,65 @@
 package com.trinity.mediaControl;
 
-import org.apache.cordova.PermissionHelper;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.apache.cordova.CallbackContext;
-import org.apache.cordova.CordovaPlugin;
-import org.apache.cordova.PluginResult;
-import android.content.pm.PackageManager;
-import android.util.Log;
-import android.content.Intent;
+import org.apache.cordova.*;
 import android.content.Context;
+import android.media.AudioManager;
 import android.view.KeyEvent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.Manifest;
-
 
 public class MediaControl extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
         String value = data.getString(0);
+        Context activeContext = cordova.getActivity().getApplicationContext();
+        AudioManager am = activeContext.getSystemService(Context.AUDIO_SERVICE);
         if (action.equals("do")) {
-          Intent i = new Intent(Intent.ACTION_MEDIA_BUTTON);
           if (value.equals("play")){
-            synchronized (this) {
-              i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PLAY));
-              sendOrderedBroadcast(i, null);
+            if (am.isMusicActive()){
+              am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PLAY));
+              return true;
             }
-            return true;
           }
           else if (value.equals("pause")){
-            synchronized (this) {
-              i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PAUSE));
-              sendOrderedBroadcast(i, null);
+            if (am.isMusicActive()){
+              am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PAUSE));
+              return true;
             }
-            return true;
           }
           else if (value.equals("next")){
-            synchronized (this) {
-              i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_NEXT));
-              sendOrderedBroadcast(i, null);
+            if (am.isMusicActive()){
+              am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_NEXT));
+              return true;
             }
-            return true;
           }
           else if (value.equals("prev")){
-            synchronized (this) {
-              i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PREVIOUS));
-              sendOrderedBroadcast(i, null);
+            if (am.isMusicActive()){
+              am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PREVIOUS));
+              return true;
             }
-            return true;
           }
           else if (value.equals("stop")){
-            synchronized (this) {
-              i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_STOP));
-              sendOrderedBroadcast(i, null);
+            if (am.isMusicActive()){
+              am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_STOP));
+              return true;
             }
-            return true;
+          }
+          else if(value.equals("volume+")){
+            int currentVolume = am.getStreamVolume(am.STREAM_MUSIC);
+            int maxVolume = am.getStreamMaxVolume(am.STREAM_MUSIC);
+            if (am.isMusicActive() && currentVolume <= maxVolume - 10){
+              currentVolume += 10;
+              am.setStreamVolume(am.STREAM_MUSIC, currentVolume, 1);
+              return true;
+            }
+          }
+          else if(value.equals("volume-")){
+            if (am.isMusicActive() && currentVolume >= 10){
+              currentVolume -= 10;
+              am.setStreamVolume(am.STREAM_MUSIC, currentVolume, 1);
+              return true;
+            }
           }
           else{
             return false;
