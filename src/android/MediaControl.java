@@ -13,7 +13,7 @@ public class MediaControl extends CordovaPlugin {
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
         String value = data.getString(0);
         Context activeContext = cordova.getActivity().getApplicationContext();
-        AudioManager am = activeContext.getSystemService(Context.AUDIO_SERVICE);
+        AudioManager am = activeContext.getSystemService(activeContext.AUDIO_SERVICE);
         if (action.equals("do")) {
           if (value.equals("play")){
             if (am.isMusicActive()){
