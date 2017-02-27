@@ -65,11 +65,11 @@ public class MediaControl extends CordovaPlugin {
             }
           }
           else{
-            callbackContext.error();
+            callbackContext.error("Método usado incorretamente");
           }
         }
         else {
-            callbackContext.error();
+            callbackContext.error("Método usado incorretamente");
         }
         return true;
     }
