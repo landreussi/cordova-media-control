@@ -18,18 +18,21 @@ public class MediaControl extends CordovaPlugin {
           if (value.equals("play")){
             if (am.isMusicActive()){
               am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PLAY));
+              callbackContext.success("Tocando");
               return true;
             }
           }
           else if (value.equals("pause")){
             if (am.isMusicActive()){
               am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PAUSE));
+              callbackContext.success("Pausado");
               return true;
             }
           }
           else if (value.equals("next")){
             if (am.isMusicActive()){
               am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_NEXT));
+              callbackContext.success("Próxima Musica");
               return true;
             }
           }
@@ -37,11 +40,13 @@ public class MediaControl extends CordovaPlugin {
             if (am.isMusicActive()){
               am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PREVIOUS));
               return true;
+              callbackContext.success("Musica Anterior");
             }
           }
           else if (value.equals("stop")){
             if (am.isMusicActive()){
               am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_STOP));
+              callbackContext.success("Parado");
               return true;
             }
           }
@@ -51,6 +56,7 @@ public class MediaControl extends CordovaPlugin {
             if (am.isMusicActive() && currentVolume <= maxVolume - 10){
               currentVolume += 10;
               am.setStreamVolume(am.STREAM_MUSIC, currentVolume, 1);
+              callbackContext.success("Volume +");
               return true;
             }
           }
@@ -60,6 +66,7 @@ public class MediaControl extends CordovaPlugin {
             if (am.isMusicActive() && currentVolume >= 10){
               currentVolume -= 10;
               am.setStreamVolume(am.STREAM_MUSIC, currentVolume, 1);
+              callbackContext.success("Volume -");
               return true;
             }
           }
