@@ -55,6 +55,8 @@ public class MediaControl extends CordovaPlugin {
             }
           }
           else if(value.equals("volume-")){
+            int currentVolume = am.getStreamVolume(am.STREAM_MUSIC);
+            int maxVolume = am.getStreamMaxVolume(am.STREAM_MUSIC);
             if (am.isMusicActive() && currentVolume >= 10){
               currentVolume -= 10;
               am.setStreamVolume(am.STREAM_MUSIC, currentVolume, 1);
