@@ -1,7 +1,13 @@
-/*global cordova, module*/
+var exec = require("cordova/exec");
 
-module.exports = {
-    do: function (action, successCallback, errorCallback) {
-        cordova.exec(successCallback, errorCallback, "MediaControl", "do", [action]);
-    }
+var MediaControl = function() {
+    exec(function() {
+        console.log("initialized");
+    }, function(e) {
+        console.log("error: " + e);
+    }, "MediaControl", "init", []);
+};
+
+MediaControl.prototype.do = function(action) {
+  exec(successCallback, errorCallback, "MediaControl", "do", [action]);
 };
