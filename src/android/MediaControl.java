@@ -18,10 +18,10 @@ public class MediaControl extends CordovaPlugin {
         String value = data.getString(0);
         Context activeContext = cordova.getActivity().getApplicationContext();
         AudioManager am = (AudioManager) activeContext.getSystemService(Context.AUDIO_SERVICE);
-        int RECORD_AUDIO = 0;
-        String [] permissions = { Manifest.permission.RECORD_AUDIO };
+        int MODIFY_AUDIO_SETTINGS = 0;
+        String [] permissions = { Manifest.permission.MODIFY_AUDIO_SETTINGS };
         if (action.equals("do")) {
-          PermissionHelper.requestPermission(this, RECORD_AUDIO, permissions[RECORD_AUDIO]);
+          PermissionHelper.requestPermission(this, MODIFY_AUDIO_SETTINGS, permissions[MODIFY_AUDIO_SETTINGS]);
           this.callback = callbackContext;
           if (value.equals("play")){
             if (am.isMusicActive()){
