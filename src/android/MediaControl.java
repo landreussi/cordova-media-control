@@ -14,6 +14,7 @@ import android.Manifest;
 
 public class MediaControl extends CordovaPlugin {
     private CallbackContext callback;
+    private boolean success;
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
         String value = data.getString(0);
         Context activeContext = cordova.getActivity().getBaseContext();
@@ -26,36 +27,36 @@ public class MediaControl extends CordovaPlugin {
           if (value.equals("play")){
             // if (am.isMusicActive()){
               am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PLAY));
-              fireEvent("success");
-              return true;
+              success = true;
+              return success;
             // }
           }
           else if (value.equals("pause")){
             // if (am.isMusicActive()){
               am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PAUSE));
-              fireEvent("success");
-              return true;
+              success = true;
+              return success;
             // }
           }
           else if (value.equals("next")){
             // if (am.isMusicActive()){
               am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_NEXT));
-              fireEvent("success");
-              return true;
+              success = true;
+              return success;
             // }
           }
           else if (value.equals("prev")){
             // if (am.isMusicActive()){
               am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PREVIOUS));
-              fireEvent("success");
-              return true;
+              success = true;
+              return success;
             // }
           }
           else if (value.equals("stop")){
             // if (am.isMusicActive()){
               am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_STOP));
-              fireEvent("success");
-              return true;
+              success = true;
+              return success;
             // }
           }
           else if(value.equals("volume+")){
@@ -64,8 +65,8 @@ public class MediaControl extends CordovaPlugin {
             // if (am.isMusicActive() && currentVolume <= maxVolume - 10){
               currentVolume += 10;
               am.setStreamVolume(am.STREAM_MUSIC, currentVolume, 1);
-              fireEvent("success");
-              return true;
+              success = true;
+              return success;
             // }
           }
           else if(value.equals("volume-")){
@@ -74,18 +75,20 @@ public class MediaControl extends CordovaPlugin {
             // if (am.isMusicActive() && currentVolume >= 10){
               currentVolume -= 10;
               am.setStreamVolume(am.STREAM_MUSIC, currentVolume, 1);
-              fireEvent("success");
-              return true;
+              success = true;
+              return success;
             // }
           }
           else{
-            fireEvent("error");
+            success = false;
+            return success;
           }
         }
         else {
-            fireEvent("error");
+          success = false;
+          return success;
         }
-        return false;
+        return true;
     }
 
     private void fireEvent(String type) {
