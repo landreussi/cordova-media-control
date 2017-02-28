@@ -65,3 +65,4 @@ public class MediaControl extends CordovaPlugin {
            return false;
     }
 }
+}
