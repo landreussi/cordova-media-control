@@ -13,7 +13,6 @@ import android.view.KeyEvent;
 import android.Manifest;
 
 public class MediaControl extends CordovaPlugin {
-    @Override
     private CallbackContext callback;
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
         String value = data.getString(0);
