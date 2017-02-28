@@ -26,35 +26,35 @@ public class MediaControl extends CordovaPlugin {
           if (value.equals("play")){
             // if (am.isMusicActive()){
               am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PLAY));
-              fireEvent("onSuccess");
+              fireEvent("success");
               return true;
             // }
           }
           else if (value.equals("pause")){
             // if (am.isMusicActive()){
               am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PAUSE));
-              fireEvent("onSuccess");
+              fireEvent("success");
               return true;
             // }
           }
           else if (value.equals("next")){
             // if (am.isMusicActive()){
               am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_NEXT));
-              fireEvent("onSuccess");
+              fireEvent("success");
               return true;
             // }
           }
           else if (value.equals("prev")){
             // if (am.isMusicActive()){
               am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PREVIOUS));
-              fireEvent("onSuccess");
+              fireEvent("success");
               return true;
             // }
           }
           else if (value.equals("stop")){
             // if (am.isMusicActive()){
               am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_STOP));
-              fireEvent("onSuccess");
+              fireEvent("success");
               return true;
             // }
           }
@@ -64,7 +64,7 @@ public class MediaControl extends CordovaPlugin {
             // if (am.isMusicActive() && currentVolume <= maxVolume - 10){
               currentVolume += 10;
               am.setStreamVolume(am.STREAM_MUSIC, currentVolume, 1);
-              fireEvent("onSuccess");
+              fireEvent("success");
               return true;
             // }
           }
@@ -74,16 +74,16 @@ public class MediaControl extends CordovaPlugin {
             // if (am.isMusicActive() && currentVolume >= 10){
               currentVolume -= 10;
               am.setStreamVolume(am.STREAM_MUSIC, currentVolume, 1);
-              fireEvent("onSuccess");
+              fireEvent("success");
               return true;
             // }
           }
           else{
-            fireEvent("onError");
+            fireEvent("error");
           }
         }
         else {
-            fireEvent("onError");
+            fireEvent("error");
         }
         return false;
     }
@@ -96,7 +96,7 @@ public class MediaControl extends CordovaPlugin {
             // this will never happen
         }
         PluginResult pr;
-        if (type.equals("onError")){
+        if (type.equals("error")){
           pr = new PluginResult(PluginResult.Status.ERROR, event);
         }
         else{
