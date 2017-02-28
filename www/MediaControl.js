@@ -8,6 +8,6 @@ var MediaControl = function() {
     }, "MediaControl", "init", []);
 };
 
-MediaControl.prototype.do = function(action) {
+MediaControl.prototype.do = function(action, successCallback, errorCallback) {
   exec(successCallback, errorCallback, "MediaControl", "do", [action]);
 };
