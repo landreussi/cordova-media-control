@@ -8,87 +8,61 @@ import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.PluginResult;
 import android.content.Context;
-import android.media.AudioManager;
+import android.content.Intent;
+// import android.media.AudioManager;
 import android.view.KeyEvent;
 import android.Manifest;
 
 public class MediaControl extends CordovaPlugin {
-    private CallbackContext callback;
-    private boolean success;
+    private int currentVolume;
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
         String value = data.getString(0);
         Context activeContext = cordova.getActivity().getBaseContext();
-        AudioManager am = (AudioManager) activeContext.getSystemService(Context.AUDIO_SERVICE);
         int MODIFY_AUDIO_SETTINGS = 0;
         String [] permissions = { Manifest.permission.MODIFY_AUDIO_SETTINGS };
         if (action.equals("do")) {
           PermissionHelper.requestPermission(this, MODIFY_AUDIO_SETTINGS, permissions[MODIFY_AUDIO_SETTINGS]);
-          this.callback = callbackContext;
           if (value.equals("play")){
-            if (am.isMusicActive()){
-              am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PLAY));
-              this.success = true;
-              return this.success;
-            }
-          }
-          else if (value.equals("pause")){
-            if (am.isMusicActive()){
-              am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PAUSE));
-              this.success = true;
-              return this.success;
-            }
-          }
-          else if (value.equals("next")){
-            if (am.isMusicActive()){
-              am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_NEXT));
-              this.success = true;
-              return this.success;
-            }
-          }
-          else if (value.equals("prev")){
-            if (am.isMusicActive()){
-              am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PREVIOUS));
-              this.success = true;
-              return this.success;
-            }
-          }
-          else if (value.equals("stop")){
-            if (am.isMusicActive()){
-              am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_STOP));
-              this.success = true;
-              return this.success;
-            }
-          }
-          else if(value.equals("volume+")){
-            int currentVolume = am.getStreamVolume(am.STREAM_MUSIC);
-            int maxVolume = am.getStreamMaxVolume(am.STREAM_MUSIC);
-            if (am.isMusicActive() && currentVolume <= maxVolume - 10){
-              currentVolume += 10;
-              am.setStreamVolume(am.STREAM_MUSIC, currentVolume, 1);
-              this.success = true;
-              return this.success;
-            }
-          }
-          else if(value.equals("volume-")){
-            int currentVolume = am.getStreamVolume(am.STREAM_MUSIC);
-            int maxVolume = am.getStreamMaxVolume(am.STREAM_MUSIC);
-            if (am.isMusicActive() && currentVolume >= 10){
-              currentVolume -= 10;
-              am.setStreamVolume(am.STREAM_MUSIC, currentVolume, 1);
-              this.success = true;
-              return this.success;
-            }
-          }
-          else{
-            this.success = false;
-            return this.success;
-          }
-        }
-        else {
-          this.success = false;
-          return this.success;
-        }
-        // return this.success;
+            Intent i = new Intent(Intent.ACTION_MEDIA_BUTTON);
+             synchronized (this) {
+               i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PLAY));
+               activeContext.sendOrderedBroadcast(i, null);
+             }
+             return true;
+           }
+           else if (value.equals("pause")){
+             Intent i = new Intent(Intent.ACTION_MEDIA_BUTTON);
+             synchronized (this) {
+               i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PAUSE));
+               activeContext.sendOrderedBroadcast(i, null);
+             }
+             return true;
+           }
+           else if (value.equals("next")){
+             Intent i = new Intent(Intent.ACTION_MEDIA_BUTTON);
+             synchronized (this) {
+               i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_NEXT));
+               activeContext.sendOrderedBroadcast(i, null);
+             }
+             return true;
+           }
+           else if (value.equals("prev")){
+             Intent i = new Intent(Intent.ACTION_MEDIA_BUTTON);
+             synchronized (this) {
+               i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PREVIOUS));
+               activeContext.sendOrderedBroadcast(i, null);
+             }
+             return true;
+           }
+           else if (value.equals("stop")){
+             Intent i = new Intent(Intent.ACTION_MEDIA_BUTTON);
+             synchronized (this) {
+               i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_STOP));
+               activeContext.sendOrderedBroadcast(i, null);
+             }
+             return true;
+           }
+           return false;
     }
 
     private void fireEvent(String type) {
