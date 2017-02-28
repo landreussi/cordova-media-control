@@ -19,7 +19,7 @@ MediaControl.prototype.do = function(action) {
 
     var errorCallback = function(err) {
         if (typeof that.error === "function") {
-            that.onerror(err);
+            that.error(err);
         }
     };
 
