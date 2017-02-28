@@ -2,7 +2,8 @@ var exec = require("cordova/exec");
 
 var MediaControl = function() {
     this.success = null;
-
+    this.error   = null;
+    
     exec(function() {
         console.log("initialized");
     }, function(e) {
@@ -13,16 +14,16 @@ var MediaControl = function() {
 MediaControl.prototype.do = function(action) {
     var that = this;
     var successCallback = function(event) {
-        if (event.type === "success" && typeof that.success === "function")
+        if (event.type === "success")
             that.success(event);
-    };
+        else
+        var errorCallback = function(err) {
+            if (event.type === "error") {
+                that.error(err);
+            }
+        };
 
-    var errorCallback = function(err) {
-        if (typeof that.error === "function") {
-            that.error(err);
-        }
     };
-
 
     exec(successCallback, errorCallback, "MediaControl", "do", [action]);
 };
