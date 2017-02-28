@@ -93,10 +93,13 @@ public class MediaControl extends CordovaPlugin {
         } catch (JSONException e) {
             // this will never happen
         }
-        if (type.equals("error"))
-          PluginResult pr = new PluginResult(PluginResult.Status.ERROR, event);
-        else
-          PluginResult pr = new PluginResult(PluginResult.Status.OK, event);
+        PluginResult pr;
+        if (type.equals("error")){
+          pr = new PluginResult(PluginResult.Status.ERROR, event);
+        }
+        else{
+          pr = new PluginResult(PluginResult.Status.OK, event);
+        }
         pr.setKeepCallback(true);
         this.callbackContext.sendPluginResult(pr);
     }
