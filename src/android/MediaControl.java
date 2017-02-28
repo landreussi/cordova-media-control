@@ -14,6 +14,7 @@ import android.Manifest;
 
 public class MediaControl extends CordovaPlugin {
     @Override
+    private CallbackContext callback;
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
         String value = data.getString(0);
         Context activeContext = cordova.getActivity().getApplicationContext();
@@ -22,6 +23,7 @@ public class MediaControl extends CordovaPlugin {
         String [] permissions = { Manifest.permission.RECORD_AUDIO };
         if (action.equals("do")) {
           PermissionHelper.requestPermission(this, RECORD_AUDIO, permissions[RECORD_AUDIO]);
+          this.callback = callbackContext;
           if (value.equals("play")){
             if (am.isMusicActive()){
               am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PLAY));
@@ -87,7 +89,7 @@ public class MediaControl extends CordovaPlugin {
         return false;
     }
 
-    public void fireEvent(String type) {
+    private void fireEvent(String type) {
         JSONObject event = new JSONObject();
         try {
             event.put("type",type);
@@ -102,6 +104,6 @@ public class MediaControl extends CordovaPlugin {
           pr = new PluginResult(PluginResult.Status.OK, event);
         }
         pr.setKeepCallback(true);
-        callbackContext.sendPluginResult(pr);
+        this.callback.sendPluginResult(pr);
     }
 }
