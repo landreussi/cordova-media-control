@@ -16,7 +16,7 @@ public class MediaControl extends CordovaPlugin {
     private CallbackContext callback;
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
         String value = data.getString(0);
-        Context activeContext = cordova.getActivity().getApplicationContext();
+        Context activeContext = cordova.getActivity().getBaseContext();
         AudioManager am = (AudioManager) activeContext.getSystemService(Context.AUDIO_SERVICE);
         int MODIFY_AUDIO_SETTINGS = 0;
         String [] permissions = { Manifest.permission.MODIFY_AUDIO_SETTINGS };
