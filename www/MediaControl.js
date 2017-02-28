@@ -11,3 +11,5 @@ var MediaControl = function() {
 MediaControl.prototype.do = function(action, successCallback, errorCallback) {
   exec(successCallback, errorCallback, "MediaControl", "do", [action]);
 };
+
+module.exports = MediaControl;
