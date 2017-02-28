@@ -2,6 +2,7 @@ var exec = require("cordova/exec");
 
 var MediaControl = function() {
     this.success = null;
+};
 
 MediaControl.prototype.do = function(action) {
     var that = this;
