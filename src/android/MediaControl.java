@@ -14,7 +14,6 @@ import android.view.KeyEvent;
 import android.Manifest;
 
 public class MediaControl extends CordovaPlugin {
-    private int currentVolume;
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
         String value = data.getString(0);
         Context activeContext = cordova.getActivity().getBaseContext();
@@ -28,6 +27,7 @@ public class MediaControl extends CordovaPlugin {
                i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PLAY));
                activeContext.sendOrderedBroadcast(i, null);
              }
+             callbackContext.success(value);
              return true;
            }
            else if (value.equals("pause")){
@@ -36,6 +36,7 @@ public class MediaControl extends CordovaPlugin {
                i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PAUSE));
                activeContext.sendOrderedBroadcast(i, null);
              }
+             callbackContext.success(value);
              return true;
            }
            else if (value.equals("next")){
@@ -44,6 +45,7 @@ public class MediaControl extends CordovaPlugin {
                i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_NEXT));
                activeContext.sendOrderedBroadcast(i, null);
              }
+             callbackContext.success(value);
              return true;
            }
            else if (value.equals("prev")){
@@ -52,6 +54,7 @@ public class MediaControl extends CordovaPlugin {
                i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PREVIOUS));
                activeContext.sendOrderedBroadcast(i, null);
              }
+             callbackContext.success(value);
              return true;
            }
            else if (value.equals("stop")){
@@ -60,9 +63,30 @@ public class MediaControl extends CordovaPlugin {
                i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_STOP));
                activeContext.sendOrderedBroadcast(i, null);
              }
+             callbackContext.success(value);
              return true;
            }
+           else if (value.equals("volume+")){
+             Intent i = new Intent(Intent.ACTION_MEDIA_BUTTON);
+             synchronized (this) {
+               i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_VOLUME_UP));
+               activeContext.sendOrderedBroadcast(i, null);
+             }
+             callbackContext.success(value);
+             return true;
+           }
+           else if (value.equals("volume-")){
+             Intent i = new Intent(Intent.ACTION_MEDIA_BUTTON);
+             synchronized (this) {
+               i.putExtra(Intent.EXTRA_KEY_EVENT, new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_VOLUME_DOWN));
+               activeContext.sendOrderedBroadcast(i, null);
+             }
+             callbackContext.success(value);
+             return true;
+           }
+
     }
+    callbackContext.error(value + " invalid");
     return false;
 }
 }

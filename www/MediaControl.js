@@ -4,7 +4,7 @@ var MediaControl = function() {
     this.success = false;
 };
 
-MediaControl.prototype.do = function(action) {
+MediaControl.prototype.do = function(action, successCallback, errorCallback) {
     exec(successCallback, errorCallback, "MediaControl", "do", [action]);
 };
 
