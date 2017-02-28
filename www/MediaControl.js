@@ -13,7 +13,7 @@ var MediaControl = function() {
 MediaControl.prototype.do = function(action) {
     var that = this;
     var successCallback = function(event) {
-        if (event.type === "success" && typeof that.onaudiostart === "function")
+        if (event.type === "success" && typeof that.success === "function")
             that.success(event);
     };
 
