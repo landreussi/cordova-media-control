@@ -10,6 +10,7 @@ import org.apache.cordova.PluginResult;
 import android.content.Context;
 import android.media.AudioManager;
 import android.view.KeyEvent;
+import android.Manifest;
 
 public class MediaControl extends CordovaPlugin {
     @Override
@@ -101,6 +102,6 @@ public class MediaControl extends CordovaPlugin {
           pr = new PluginResult(PluginResult.Status.OK, event);
         }
         pr.setKeepCallback(true);
-        this.callbackContext.sendPluginResult(pr);
+        callbackContext.sendPluginResult(pr);
     }
 }
