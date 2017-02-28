@@ -25,59 +25,59 @@ public class MediaControl extends CordovaPlugin {
           PermissionHelper.requestPermission(this, MODIFY_AUDIO_SETTINGS, permissions[MODIFY_AUDIO_SETTINGS]);
           this.callback = callbackContext;
           if (value.equals("play")){
-            // if (am.isMusicActive()){
+            if (am.isMusicActive()){
               am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PLAY));
               this.success = true;
               return this.success;
-            // }
+            }
           }
           else if (value.equals("pause")){
-            // if (am.isMusicActive()){
+            if (am.isMusicActive()){
               am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PAUSE));
               this.success = true;
               return this.success;
-            // }
+            }
           }
           else if (value.equals("next")){
-            // if (am.isMusicActive()){
+            if (am.isMusicActive()){
               am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_NEXT));
               this.success = true;
               return this.success;
-            // }
+            }
           }
           else if (value.equals("prev")){
-            // if (am.isMusicActive()){
+            if (am.isMusicActive()){
               am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PREVIOUS));
               this.success = true;
               return this.success;
-            // }
+            }
           }
           else if (value.equals("stop")){
-            // if (am.isMusicActive()){
+            if (am.isMusicActive()){
               am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_STOP));
               this.success = true;
               return this.success;
-            // }
+            }
           }
           else if(value.equals("volume+")){
             int currentVolume = am.getStreamVolume(am.STREAM_MUSIC);
             int maxVolume = am.getStreamMaxVolume(am.STREAM_MUSIC);
-            // if (am.isMusicActive() && currentVolume <= maxVolume - 10){
+            if (am.isMusicActive() && currentVolume <= maxVolume - 10){
               currentVolume += 10;
               am.setStreamVolume(am.STREAM_MUSIC, currentVolume, 1);
               this.success = true;
               return this.success;
-            // }
+            }
           }
           else if(value.equals("volume-")){
             int currentVolume = am.getStreamVolume(am.STREAM_MUSIC);
             int maxVolume = am.getStreamMaxVolume(am.STREAM_MUSIC);
-            // if (am.isMusicActive() && currentVolume >= 10){
+            if (am.isMusicActive() && currentVolume >= 10){
               currentVolume -= 10;
               am.setStreamVolume(am.STREAM_MUSIC, currentVolume, 1);
               this.success = true;
               return this.success;
-            // }
+            }
           }
           else{
             this.success = false;
