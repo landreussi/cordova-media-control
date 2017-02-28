@@ -9,15 +9,13 @@ var MediaControl = function() {
 MediaControl.prototype.do = function(action) {
     var that = this;
     var successCallback = function(event) {
-        if (event.type === "onSuccess")
+        if (event.type === "onSuccess" && typeof that.onSuccess === "function")
             that.onSuccess(event);
-        else
-        var errorCallback = function(err) {
-            if (event.type === "onError") {
-                that.onError(err);
-            }
-        };
-
+    };
+    var errorCallback = function(err) {
+        if (event.type === "onError" && typeof that.onError === "function")) {
+            that.onError(err);
+        }
     };
 
     exec(successCallback, errorCallback, "MediaControl", "do", [action]);
