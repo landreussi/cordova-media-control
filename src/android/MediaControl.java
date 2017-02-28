@@ -86,7 +86,7 @@ public class MediaControl extends CordovaPlugin {
         return false;
     }
 
-    private void fireEvent(String type) {
+    public void fireEvent(String type) {
         JSONObject event = new JSONObject();
         try {
             event.put("type",type);
