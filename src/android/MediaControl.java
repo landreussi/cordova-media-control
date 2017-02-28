@@ -64,22 +64,4 @@ public class MediaControl extends CordovaPlugin {
            }
            return false;
     }
-
-    private void fireEvent(String type) {
-        JSONObject event = new JSONObject();
-        try {
-            event.put("type",type);
-        } catch (JSONException e) {
-            // this will never happen
-        }
-        PluginResult pr;
-        if (type.equals("error")){
-          pr = new PluginResult(PluginResult.Status.ERROR, event);
-        }
-        else{
-          pr = new PluginResult(PluginResult.Status.OK, event);
-        }
-        pr.setKeepCallback(true);
-        this.callback.sendPluginResult(pr);
-    }
 }
