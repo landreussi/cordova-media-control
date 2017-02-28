@@ -19,31 +19,35 @@ public class MediaControl extends CordovaPlugin {
             if (am.isMusicActive()){
               am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PLAY));
               callbackContext.success("Tocando");
+              return true;
             }
           }
           else if (value.equals("pause")){
             if (am.isMusicActive()){
               am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PAUSE));
               callbackContext.success("Pausado");
-
+              return true;
             }
           }
           else if (value.equals("next")){
             if (am.isMusicActive()){
               am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_NEXT));
               callbackContext.success("Próxima Musica");
+              return true;
             }
           }
           else if (value.equals("prev")){
             if (am.isMusicActive()){
               am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PREVIOUS));
               callbackContext.success("Musica Anterior");
+              return true;
             }
           }
           else if (value.equals("stop")){
             if (am.isMusicActive()){
               am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_STOP));
               callbackContext.success("Parado");
+              return true;
             }
           }
           else if(value.equals("volume+")){
@@ -53,6 +57,7 @@ public class MediaControl extends CordovaPlugin {
               currentVolume += 10;
               am.setStreamVolume(am.STREAM_MUSIC, currentVolume, 1);
               callbackContext.success("Volume +");
+              return true;
             }
           }
           else if(value.equals("volume-")){
@@ -62,6 +67,7 @@ public class MediaControl extends CordovaPlugin {
               currentVolume -= 10;
               am.setStreamVolume(am.STREAM_MUSIC, currentVolume, 1);
               callbackContext.success("Volume -");
+              return true;
             }
           }
           else{
@@ -71,5 +77,6 @@ public class MediaControl extends CordovaPlugin {
         else {
             callbackContext.error("Método usado incorretamente");
         }
+        return false;
     }
 }
