@@ -55,8 +55,8 @@ public class MediaControl extends CordovaPlugin {
             // if (am.isMusicActive()){
               am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_STOP));
               fireEvent("success");
-              // return true;
-            }
+              return true;
+            // }
           }
           else if(value.equals("volume+")){
             int currentVolume = am.getStreamVolume(am.STREAM_MUSIC);
