@@ -1,9 +1,12 @@
 package com.trinity.mediaControl;
 
+import org.apache.cordova.PermissionHelper;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.apache.cordova.*;
+import org.apache.cordova.CallbackContext;
+import org.apache.cordova.CordovaPlugin;
+import org.apache.cordova.PluginResult;
 import android.content.Context;
 import android.media.AudioManager;
 import android.view.KeyEvent;
@@ -14,7 +17,10 @@ public class MediaControl extends CordovaPlugin {
         String value = data.getString(0);
         Context activeContext = cordova.getActivity().getApplicationContext();
         AudioManager am = (AudioManager) activeContext.getSystemService(Context.AUDIO_SERVICE);
+        int RECORD_AUDIO = 0;
+        String [] permissions = { Manifest.permission.RECORD_AUDIO };
         if (action.equals("do")) {
+          PermissionHelper.requestPermission(this, RECORD_AUDIO, permissions[RECORD_AUDIO]);
           if (value.equals("play")){
             if (am.isMusicActive()){
               am.dispatchMediaKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_MEDIA_PLAY));
