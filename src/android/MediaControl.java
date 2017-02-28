@@ -88,7 +88,7 @@ public class MediaControl extends CordovaPlugin {
           this.success = false;
           return this.success;
         }
-        return this.success;
+        // return this.success;
     }
 
     private void fireEvent(String type) {
