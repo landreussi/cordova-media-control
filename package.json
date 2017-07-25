@@ -1,0 +1,28 @@
+{
+  "name": "cordova-media-control",
+  "version": "0.1.0",
+  "description": "Cordova Media Control Plugin",
+  "cordova": {
+    "id": "cordova-media-control",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/landreussi/cordova-media-control.git"
+  },
+  "keywords": [
+    "cordova",
+    "media",
+    "control",
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "Lucas Andreussi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/landreussi/cordova-media-control/issues"
+  },
+  "homepage": "https://github.com/landreussi/cordova-media-control#readme"
+}
